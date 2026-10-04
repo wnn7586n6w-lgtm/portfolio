@@ -1,0 +1,1015 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portfolio d’Alix Neuville : communication et direction artistique.">
+<title>Portfolio Alix Neuville</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Geist+Mono:wght@400;500&family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+/* Layout : une pochette d'album sur une colonne. Intro, faces A/B, tracklist, cinq pistes, bonus, crédits. Thème sombre assumé (univers soirée), unique. */
+:root{
+  color-scheme: dark;
+  --bg:#0b0b0d;
+  --bg-fade:rgba(11,11,13,0);
+  --bg-2:#121215;
+  --panel:rgba(255,255,255,.035);
+  --panel-2:rgba(255,255,255,.065);
+  --line:rgba(255,255,255,.09);
+  --line-2:rgba(255,255,255,.17);
+  --fg:#f1efea;
+  --fg-2:#b5b3ba;
+  --fg-3:#7d7b83;
+  --glow:rgba(255,255,255,.3);
+  --onair:#ff4a3d;
+  --chrome-hi:#cfcfd2; --chrome-lo:#7c7c81;
+  --tl-red:#ff5f57; --tl-yellow:#febc2e; --tl-green:#28c840;
+  --teamder:#0c1636; --teamder-blue:#3b63e8;
+  --aveio:#0e2a2e; --aveio-copper:#d9823f;
+  /* Palette thermique du concept FRETTE */
+  --t0:#060a24; --t1:#24168a; --t2:#7a1fb5; --t3:#e3266f; --t4:#ff7a1f; --t5:#ffd43b; --t6:#fff7da;
+  --h1:#7d8bff; --h2:#9f70ff; --h3:#d457d8; --h4:#ff5290; --h5:#ff7a3d; --h6:#ffae2e; --h7:#ffe066; --h8:#fff3c4;
+
+  --sans:"Geist","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --serif:"Instrument Serif","Iowan Old Style","Times New Roman",serif;
+  --mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --display:"Big Shoulders Display","Arial Narrow","Helvetica Neue",sans-serif;
+
+  --wrap:1160px;
+  --gutter:clamp(16px,4vw,40px);
+  --r:14px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{
+  margin:0;
+  padding-inline:var(--gutter);
+  background:radial-gradient(1100px 620px at 50% -8%, rgba(255,255,255,.075), transparent 62%) no-repeat, var(--bg);
+  color:var(--fg);
+  font-family:var(--sans);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--fg);outline-offset:3px;border-radius:6px}
+.wrap{max-width:var(--wrap);margin-inline:auto}
+.dim{color:var(--fg-3)}
+
+/* Petite entrée en mouvement : le contenu reste visible, seul le décalage s'anime */
+.rise{transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.rise.pre{transform:translateY(32px)}
+
+/* ---------- Barre du haut ---------- */
+.top{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:30;
+  margin-inline:calc(var(--gutter) * -1);
+  padding:14px var(--gutter) 22px;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;
+  background:linear-gradient(var(--bg) 58%, var(--bg-fade));
+}
+.who{line-height:1.25;min-width:0}
+.who strong{display:block;font-weight:500;font-size:15.5px;letter-spacing:-.01em}
+.who span{font-size:12.5px;color:var(--fg-3)}
+.pill{
+  display:flex;gap:2px;padding:4px;border-radius:999px;
+  background:var(--panel-2);border:1px solid var(--line);
+  -webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 12px 30px rgba(0,0,0,.45);
+}
+.pill a{position:relative;padding:7px 16px;border-radius:999px;font-size:13.5px;color:var(--fg-2);text-decoration:none;transition:background .2s,color .2s}
+.pill a:hover{color:var(--fg);background:var(--panel-2)}
+.pill a.on{color:var(--fg);background:rgba(255,255,255,.11)}
+.pill a.on::before{content:"";position:absolute;left:50%;top:-5px;width:16px;height:2px;margin-left:-8px;border-radius:2px;background:var(--fg);box-shadow:0 0 10px var(--glow)}
+.links{justify-self:end;display:flex;gap:22px}
+.links a{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;text-decoration:none;opacity:.86;transition:opacity .2s}
+.links a:hover{opacity:1}
+.links a span{font-size:12px;transition:transform .2s}
+.links a:hover span{transform:translate(2px,-2px)}
+
+/* ---------- Hero ---------- */
+.hero{padding-block:clamp(16px,4vw,44px) 0}
+.frame{
+  position:relative;max-width:1000px;margin-inline:auto;border-radius:18px;overflow:hidden;
+  background:linear-gradient(180deg,#151517,#0c0c0e 75%);
+  border:1px solid var(--line-2);
+  box-shadow:0 0 0 1px rgba(0,0,0,.6), 0 30px 120px rgba(0,0,0,.7), 0 0 90px rgba(255,255,255,.05);
+  -webkit-mask-image:linear-gradient(#000 80%, transparent);mask-image:linear-gradient(#000 80%, transparent);
+  transform-origin:50% 0;will-change:transform;
+}
+.bar{display:flex;align-items:center;gap:8px;height:34px;padding-inline:14px;background:linear-gradient(180deg,var(--chrome-hi),var(--chrome-lo))}
+.bar i{width:11px;height:11px;border-radius:50%;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.25)}
+.bar i:nth-child(1){background:var(--tl-red)}
+.bar i:nth-child(2){background:var(--tl-yellow)}
+.bar i:nth-child(3){background:var(--tl-green)}
+.bar b{margin-left:auto;font-weight:300;font-size:20px;line-height:1;color:rgba(0,0,0,.4)}
+.screen{
+  padding:clamp(52px,9vw,112px) clamp(22px,6vw,68px) clamp(84px,11vw,140px);
+  background:radial-gradient(70% 60% at 28% 42%, rgba(255,255,255,.06), transparent 70%);
+}
+.hero h1{
+  margin:0;max-width:16.5ch;
+  font-weight:400;font-size:clamp(38px,7vw,84px);line-height:1.02;letter-spacing:-.045em;
+  color:#f5f4f1;text-wrap:balance;
+  text-shadow:0 0 22px rgba(255,255,255,.3), 0 0 2px rgba(255,255,255,.5);
+  animation:settle 1s cubic-bezier(.2,.7,.2,1) both;
+}
+.hero h1 em{
+  font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.06em;letter-spacing:-.01em;padding-right:.08em;
+  background:linear-gradient(180deg,#fff 15%,#8f8f95 95%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:none;filter:drop-shadow(0 0 16px rgba(255,255,255,.35));
+}
+@keyframes settle{from{filter:blur(5px)}to{filter:blur(0)}}
+.hero-sub{margin-top:clamp(36px,6vw,60px);padding-left:min(42%,420px);font-size:clamp(16px,1.7vw,19px);line-height:1.45}
+.hero-sub p{margin:0}
+.hero-sub .dim{text-decoration:underline dotted var(--line-2);text-underline-offset:6px}
+.down{display:block;width:max-content;margin:clamp(36px,6vw,56px) auto 0;color:var(--fg-2);font-size:22px;text-decoration:none;animation:nudge 2.6s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateY(6px)}}
+
+/* ---------- Titres de section ---------- */
+.sec{padding-block:clamp(80px,11vw,140px) 0}
+.eyebrow{display:flex;align-items:center;gap:10px;margin:0 0 18px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3)}
+.eyebrow::before{content:"";width:18px;height:1px;background:var(--line-2)}
+h2{margin:0;max-width:21ch;font-weight:400;font-size:clamp(32px,5vw,58px);line-height:1.05;letter-spacing:-.035em;text-wrap:balance}
+h2 em,h3 em,.thanks em{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.07em;letter-spacing:-.005em}
+
+/* ---------- Intro ---------- */
+.intro-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(28px,6vw,80px);align-items:end}
+.bio{margin:0;font-size:clamp(20px,2.3vw,26px);line-height:1.45;letter-spacing:-.015em;max-width:38ch;text-wrap:pretty}
+.pull{margin:0;padding-left:20px;border-left:1px solid var(--line-2);color:var(--fg-2);font-size:17px;line-height:1.55;max-width:34ch}
+.pull em{display:block;margin-top:6px;color:var(--fg);font-family:var(--serif);font-size:1.45em;line-height:1.2}
+.faces{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:clamp(48px,7vw,80px)}
+.face{display:grid;grid-template-columns:112px minmax(0,1fr);gap:24px;padding:26px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel)}
+.vinyl{
+  --label:var(--fg);
+  position:relative;width:112px;aspect-ratio:1;border-radius:50%;
+  background:
+    radial-gradient(circle, var(--label) 0 29%, transparent 29.6%),
+    repeating-radial-gradient(circle, #19191c 0 1.1px, #0d0d0f 1.1px 2.6px);
+  box-shadow:0 0 0 1px var(--line-2), 0 18px 40px rgba(0,0,0,.55);
+}
+.vinyl::after{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 25deg, transparent 0 9%, rgba(255,255,255,.11) 13%, transparent 19% 59%, rgba(255,255,255,.08) 63%, transparent 69%)}
+.vinyl span{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--serif);font-style:italic;font-size:26px;color:var(--bg)}
+.face.b .vinyl{--label:var(--onair)}
+.face:hover .vinyl{animation:spin 2.2s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.face-k{margin:0;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
+.face h3{margin:6px 0 10px;font-weight:400;font-size:30px;line-height:1.1;letter-spacing:-.025em}
+.face h3 span{display:block;margin-top:4px;font-family:var(--mono);font-size:13px;letter-spacing:0;color:var(--fg-2)}
+.face p{margin:0 0 14px;color:var(--fg-2);font-size:15.5px}
+.face ul{list-style:none;margin:0;padding:0}
+.face li{padding:9px 0;border-top:1px solid var(--line);font-size:14.5px;color:var(--fg-2)}
+.face li::before{content:"↳ ";color:var(--fg-3)}
+
+/* ---------- Tracklist ---------- */
+.tracks{list-style:none;margin:40px 0 0;padding:0;border-top:1px solid var(--line)}
+.tracks a{display:grid;grid-template-columns:56px minmax(0,1fr) auto 70px;align-items:center;gap:16px;padding:18px 10px;border-bottom:1px solid var(--line);text-decoration:none;transition:background .2s}
+.tracks a:hover{background:var(--panel)}
+.tracks a:hover .tt{transform:translateX(6px)}
+.no{font-family:var(--mono);font-size:13px;color:var(--fg-3)}
+.tt{font-size:clamp(20px,2.4vw,28px);line-height:1.2;letter-spacing:-.02em;transition:transform .25s}
+.tt small{display:block;margin-top:3px;font-size:14px;letter-spacing:0;color:var(--fg-3)}
+.tags{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-2);text-align:right}
+.side{justify-self:end;padding:3px 10px;border:1px solid var(--line-2);border-radius:999px;font-family:var(--mono);font-size:12px;color:var(--fg-2);white-space:nowrap}
+.legend{margin:16px 0 0;font-family:var(--mono);font-size:12px;color:var(--fg-3)}
+
+/* ---------- Pistes (études de cas) ---------- */
+.meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:34px 0 0;padding-top:20px;border-top:1px solid var(--line)}
+.meta dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
+.meta dd{margin:6px 0 0;font-size:15px;line-height:1.5;color:var(--fg-2)}
+.gallery{margin-top:clamp(36px,5vw,56px)}
+.tile{margin:0;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg-2)}
+.tile img{width:100%;object-fit:cover}
+figcaption,.cap-line{padding:10px 14px;font-family:var(--mono);font-size:12px;line-height:1.45;color:var(--fg-3);border-top:1px solid var(--line)}
+.story{margin-top:clamp(40px,6vw,64px)}
+.row{display:grid;grid-template-columns:220px minmax(0,1fr);gap:16px 32px;padding:26px 0;border-top:1px solid var(--line)}
+.lab{margin:0;padding-top:4px;font-family:var(--mono);font-weight:400;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
+.txt{max-width:66ch}
+.txt p{margin:0 0 12px}
+.txt p:last-child{margin-bottom:0}
+.txt ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.txt li{position:relative;padding-left:22px}
+.txt li::before{content:"";position:absolute;left:0;top:.72em;width:10px;height:1px;background:var(--fg-3)}
+.txt strong{font-weight:500;color:var(--fg)}
+.chips{display:flex !important;flex-wrap:wrap;gap:8px !important;margin-top:16px !important}
+.chips li{padding:4px 12px !important;border:1px solid var(--line-2);border-radius:999px;font-size:13px;color:var(--fg-2)}
+.chips li::before{display:none}
+.figs{display:flex;flex-wrap:wrap;gap:14px 44px;margin:2px 0 18px}
+.fig b{display:block;font-weight:300;font-size:clamp(36px,4.2vw,50px);line-height:1;letter-spacing:-.045em;text-shadow:0 0 18px rgba(255,255,255,.22)}
+.fig span{display:block;margin-top:6px;font-size:13.5px;line-height:1.4;color:var(--fg-3);max-width:20ch}
+
+/* Teamder : carrousel Instagram qui défile */
+.strip{
+  display:flex;gap:14px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;
+  margin-right:min(0px, calc((100% - 100vw) / 2));padding-right:var(--gutter);
+  cursor:grab;-webkit-user-select:none;user-select:none;
+}
+.strip::-webkit-scrollbar{display:none}
+.strip.drag{scroll-snap-type:none;cursor:grabbing}
+.slide{flex:0 0 clamp(250px,30%,360px);margin:0;scroll-snap-align:start;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--teamder);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.slide img{width:100%;aspect-ratio:4/5;object-fit:cover;pointer-events:none}
+.strip:not(.drag) .slide:hover{transform:translateY(-6px)}
+.strip-ui{display:flex;align-items:center;gap:16px;margin-top:16px}
+.strip-ui .lbl{font-family:var(--mono);font-size:12px;color:var(--fg-3);white-space:nowrap}
+.progress{position:relative;flex:1;height:2px;border-radius:2px;background:var(--line);overflow:hidden}
+.progress i{position:absolute;top:0;bottom:0;left:var(--x,0%);width:var(--w,30%);border-radius:2px;background:var(--fg)}
+.sbtn{flex:none;display:grid;place-items:center;width:40px;height:40px;padding:0;border-radius:50%;border:1px solid var(--line-2);background:var(--panel);color:var(--fg);font:inherit;font-size:16px;cursor:pointer;transition:background .2s}
+.sbtn:hover{background:var(--panel-2)}
+.t-row{display:grid;grid-template-columns:minmax(0,1.62fr) minmax(0,1fr);gap:14px;margin-top:22px}
+.t-fiche img{aspect-ratio:1400/868}
+.ig-card{
+  display:flex;flex-direction:column;justify-content:space-between;gap:18px;padding:clamp(22px,3vw,32px);
+  border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--fg);
+  background:radial-gradient(90% 80% at 85% 0%, rgba(59,99,232,.5), transparent 65%), var(--teamder);
+  transition:transform .3s, border-color .3s;
+}
+.ig-card:hover{transform:translateY(-4px);border-color:var(--line-2)}
+.ig-card .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-2)}
+.ig-card .handle{font-family:var(--serif);font-style:italic;font-size:clamp(34px,4vw,52px);line-height:1;letter-spacing:-.01em}
+.ig-card .desc{color:var(--fg-2);font-size:15px;max-width:30ch}
+.ig-card .go{align-self:flex-start;padding:9px 16px;border-radius:999px;background:var(--fg);color:var(--teamder);font-size:14px;font-weight:500}
+
+/* Animal'aide */
+.g-animal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.g-animal .a-wide img{aspect-ratio:1050/600}
+.a-row{grid-column:1/-1;display:grid;grid-template-columns:.675fr 1fr;gap:14px}
+.a-banner img{aspect-ratio:851/315}
+.a-sign img{aspect-ratio:1584/396}
+
+/* Formats courts : timeline de montage */
+.timeline{margin:0;padding:18px clamp(14px,3vw,26px) 22px;border:1px solid var(--line);border-radius:12px;background:var(--bg-2)}
+.tl-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3)}
+.tl-head b{font-weight:500;color:var(--fg-2)}
+.tl-body{display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:12px;margin-top:16px}
+.names,.lanes{display:grid;grid-template-rows:22px 36px 24px 36px;row-gap:8px}
+.names span{align-self:center;font-family:var(--mono);font-size:11px;color:var(--fg-3)}
+.lanes{position:relative}
+.ruler{position:relative;border-bottom:1px solid var(--line)}
+.ruler span{position:absolute;top:0;left:calc(var(--t) / 30 * 100%);transform:translateX(-50%);font-family:var(--mono);font-size:11px;color:var(--fg-3);white-space:nowrap}
+.ruler span:first-child{transform:none}
+.ruler span:last-child{transform:translateX(-100%)}
+.lane{position:relative}
+.lane > *{position:absolute;top:0;bottom:0;left:calc(var(--s) / 30 * 100%);width:calc((var(--e) - var(--s)) / 30 * 100% - 3px);border-radius:6px}
+.clip{display:flex;align-items:center;padding-inline:8px;overflow:hidden;white-space:nowrap;font-size:12px;font-weight:500;color:var(--fg);border:1px solid rgba(255,255,255,.12);background:color-mix(in srgb, var(--fg) 14%, var(--bg-2))}
+.clip.hook{background:color-mix(in srgb, var(--onair) 62%, var(--bg-2));border-color:color-mix(in srgb, var(--onair) 80%, transparent)}
+.clip.c3{background:color-mix(in srgb, var(--fg) 22%, var(--bg-2))}
+.sub{background:color-mix(in srgb, var(--fg) 30%, var(--bg-2));top:6px !important;bottom:6px !important}
+.wave{background:repeating-linear-gradient(90deg, color-mix(in srgb, var(--fg) 46%, transparent) 0 2px, transparent 2px 5px)}
+.wave.soft{top:11px !important;bottom:11px !important;opacity:.7}
+.playhead{position:absolute;top:0;bottom:-4px;left:10%;width:2px;margin-left:-1px;background:var(--onair);box-shadow:0 0 10px var(--onair)}
+.playhead::before{content:"";position:absolute;top:-2px;left:-5px;border:6px solid transparent;border-top-color:var(--onair)}
+.tl-legend{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.tl-legend li{padding-top:10px;border-top:1px solid var(--line);font-size:14px;color:var(--fg-2);line-height:1.45}
+.tl-legend b{display:block;margin-bottom:2px;font-family:var(--mono);font-size:12px;font-weight:500;color:var(--fg)}
+.tl-legend li:first-child b{color:var(--onair)}
+.tl-note{margin:14px 0 0;font-family:var(--mono);font-size:12px;color:var(--fg-3)}
+
+/* Deux comptes */
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{padding:clamp(22px,3vw,32px);border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.card .k{margin:0 0 18px;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
+.card .big{margin:0;font-weight:300;font-size:clamp(52px,7.5vw,96px);line-height:.95;letter-spacing:-.055em;text-shadow:0 0 26px rgba(255,255,255,.25)}
+.card .big sup{font-size:.45em;vertical-align:.9em;margin-left:.04em}
+.card .big.serif{font-family:var(--serif);font-style:italic;font-size:clamp(40px,5vw,62px);letter-spacing:-.02em;line-height:1.02}
+.card .cap{margin:16px 0 0;color:var(--fg-2);font-size:15.5px;max-width:36ch}
+.card ul{list-style:none;margin:18px 0 0;padding:0}
+.card li{padding:9px 0;border-top:1px solid var(--line);font-size:15px;color:var(--fg-2)}
+
+/* Aveio : trois sites sur mobile */
+.aveio-band{
+  position:relative;display:flex;justify-content:center;align-items:center;gap:clamp(12px,4vw,48px);
+  padding:clamp(44px,6vw,80px) 16px;border:1px solid var(--line);border-radius:12px;overflow:hidden;
+  background:radial-gradient(55% 70% at 50% 15%, rgba(217,130,63,.3), transparent 70%), var(--aveio);
+}
+.phone{flex:0 1 250px;min-width:0;margin:0;padding:7px;border-radius:36px;background:#050608;box-shadow:0 0 0 1px rgba(255,255,255,.14), 0 30px 60px rgba(0,0,0,.5)}
+.phone img{width:100%;border-radius:29px}
+.aveio-band .phone{transform:translateY(calc(var(--lift,0px) + var(--py,0px)));will-change:transform}
+.aveio-band .phone img{aspect-ratio:780/1688;object-fit:cover}
+.aveio-band .phone{flex-basis:280px}
+.g-aveio{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,5vw,64px);align-items:center}
+.sell{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:14px}
+.sell li{padding-top:12px;border-top:1px solid var(--line);font-size:14.5px;line-height:1.45;color:var(--fg-2)}
+.sell b{display:block;margin-bottom:3px;font-size:15px;font-weight:500;color:var(--fg)}
+
+/* ---------- Bonus : FRETTE ---------- */
+#bonus .eyebrow{color:var(--h6)}
+#bonus .eyebrow::before{background:linear-gradient(90deg,var(--h1),var(--h7))}
+.bonus-intro{margin:20px 0 0;max-width:58ch;font-size:clamp(18px,2vw,21px);line-height:1.5;color:var(--fg-2)}
+.bonus-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:start;margin-top:clamp(36px,5vw,56px)}
+.poster-wrap{margin:0;position:sticky;top:96px}
+.poster{
+  container-type:inline-size;position:relative;aspect-ratio:3/4;border-radius:10px;overflow:hidden;isolation:isolate;
+  background:radial-gradient(120% 75% at 50% 112%, var(--t1), var(--t0) 62%);
+  box-shadow:0 40px 110px rgba(0,0,0,.65), 0 0 0 1px var(--line-2);
+  color:var(--t6);
+}
+.heat{position:absolute;border-radius:50%;filter:blur(5px);mix-blend-mode:screen;z-index:-1;
+  background:radial-gradient(circle, var(--t6) 0 5%, var(--t5) 13%, var(--t4) 25%, var(--t3) 40%, var(--t2) 56%, var(--t1) 69%, transparent 71%);
+  animation:drift 10s ease-in-out infinite alternate}
+.heat.a{width:74cqw;height:74cqw;left:-10cqw;top:44cqw}
+.heat.b{width:56cqw;height:56cqw;right:-14cqw;top:66cqw;animation-delay:-4s}
+.heat.c{width:40cqw;height:40cqw;left:38cqw;top:94cqw;animation-delay:-7s}
+@keyframes drift{to{transform:translate(3cqw,-4cqw) scale(1.06)}}
+.p-top{position:absolute;left:7cqw;right:7cqw;top:6cqw;display:flex;justify-content:space-between;font-family:var(--mono);font-size:2.7cqw;letter-spacing:.22em;text-transform:uppercase}
+.p-title{position:absolute;left:6cqw;right:6cqw;top:11cqw;margin:0;font-family:var(--display);font-weight:900;font-size:27.5cqw;line-height:.82;letter-spacing:-.005em;text-align:center;text-shadow:0 0 4cqw rgba(255,122,31,.45)}
+.p-tag{position:absolute;left:7cqw;right:7cqw;top:36cqw;margin:0;text-align:center;font-family:var(--mono);font-size:2.7cqw;letter-spacing:.16em;text-transform:uppercase;color:color-mix(in srgb, var(--t6) 75%, transparent)}
+.hud{position:absolute;inset:0;pointer-events:none}
+.hud .c{position:absolute;width:6cqw;height:6cqw;border:0 solid color-mix(in srgb, var(--t6) 70%, transparent)}
+.hud .tl{left:4cqw;top:46cqw;border-left-width:.5cqw;border-top-width:.5cqw}
+.hud .tr{right:4cqw;top:46cqw;border-right-width:.5cqw;border-top-width:.5cqw}
+.hud .bl{left:4cqw;bottom:27cqw;border-left-width:.5cqw;border-bottom-width:.5cqw}
+.hud .br{right:4cqw;bottom:27cqw;border-right-width:.5cqw;border-bottom-width:.5cqw}
+.hud .cross{position:absolute;left:24cqw;top:78cqw;font-family:var(--mono);font-size:7cqw;line-height:1;transform:translate(-50%,-50%)}
+.hud .read{position:absolute;left:29cqw;top:73.5cqw;padding:.6cqw 1.4cqw;font-family:var(--mono);font-size:2.8cqw;background:rgba(6,10,36,.55);border:.3cqw solid color-mix(in srgb, var(--t6) 50%, transparent)}
+.hud .scale{position:absolute;right:6cqw;top:58cqw;width:2.2cqw;height:34cqw;background:linear-gradient(to top, var(--t0), var(--t1), var(--t2), var(--t3), var(--t4), var(--t5), var(--t6));outline:.3cqw solid color-mix(in srgb, var(--t6) 40%, transparent)}
+.hud .scale span{position:absolute;right:3.6cqw;font-family:var(--mono);font-size:2.4cqw;white-space:nowrap}
+.hud .scale span:first-child{top:-1cqw}
+.hud .scale span:last-child{bottom:-1cqw}
+.p-bottom{position:absolute;left:7cqw;right:7cqw;bottom:11cqw;display:grid;grid-template-columns:1fr 1fr;gap:4cqw;padding-top:3cqw;border-top:.3cqw solid color-mix(in srgb, var(--t6) 45%, transparent)}
+.p-bottom b{display:block;font-family:var(--display);font-weight:800;font-size:10cqw;line-height:.95}
+.p-bottom span{font-family:var(--mono);font-size:2.6cqw;letter-spacing:.18em;text-transform:uppercase}
+.p-foot{position:absolute;left:7cqw;right:7cqw;bottom:5cqw;display:flex;justify-content:space-between;gap:3cqw;font-family:var(--mono);font-size:2.4cqw;letter-spacing:.14em;text-transform:uppercase;color:color-mix(in srgb, var(--t6) 80%, transparent)}
+.poster-wrap figcaption{border-top:0;padding-inline:0}
+
+.sheet{margin:0}
+.sheet > div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:8px 20px;padding:16px 0;border-top:1px solid var(--line)}
+.sheet dt{padding-top:3px;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
+.sheet dd{margin:0;color:var(--fg-2);font-size:15.5px}
+.sheet dd strong{display:block;font-weight:500;color:var(--fg);font-size:17px}
+.sub-h{margin:clamp(44px,6vw,64px) 0 18px;font-weight:400;font-size:clamp(22px,2.6vw,28px);letter-spacing:-.02em}
+.camp{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid;border-image:linear-gradient(180deg,var(--h1),var(--h3),var(--h5),var(--h7)) 1}
+.camp li{display:grid;grid-template-columns:72px minmax(0,1fr);gap:14px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px;color:var(--fg-2)}
+.camp li:last-child{border-bottom:0}
+.camp .j{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--h)}
+.camp strong{font-weight:500;color:var(--fg)}
+.hooks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.hooks li{display:flex;flex-direction:column;justify-content:space-between;gap:18px;padding:20px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.hooks q{font-family:var(--serif);font-style:italic;font-size:clamp(22px,2.2vw,26px);line-height:1.18;color:var(--fg);quotes:"«\00a0" "\00a0»"}
+.hooks span{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3)}
+
+/* ---------- Crédits ---------- */
+.credits{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(28px,6vw,80px);margin-top:40px}
+.credits h3{margin:0 0 14px;font-family:var(--mono);font-weight:400;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3)}
+.skills{list-style:none;margin:0;padding:0}
+.skills li{display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr);gap:4px 20px;padding:14px 0;border-top:1px solid var(--line)}
+.skills b{font-weight:500;font-size:16.5px}
+.skills span{color:var(--fg-3);font-size:15px}
+.tools{margin:0}
+.tools > div{padding:14px 0;border-top:1px solid var(--line)}
+.tools dt{margin-bottom:10px;font-size:14px;color:var(--fg-2)}
+.tools dd{margin:0;display:flex;flex-wrap:wrap;gap:8px}
+.tools dd span{padding:4px 12px;border:1px solid var(--line-2);border-radius:999px;font-size:13.5px}
+
+/* ---------- Fin ---------- */
+.end{padding-block:clamp(90px,13vw,170px) clamp(48px,7vw,80px);text-align:center}
+.thanks{margin:0 auto;max-width:18ch;font-size:clamp(34px,5.5vw,64px);line-height:1.05;letter-spacing:-.04em;text-wrap:balance;text-shadow:0 0 22px rgba(255,255,255,.22)}
+.contact{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:36px 0 0}
+.contact a{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border:1px solid var(--line-2);border-radius:999px;background:var(--panel);font-size:15px;text-decoration:none;transition:background .2s, transform .2s}
+.contact a:hover{background:var(--panel-2);transform:translateY(-2px)}
+.contact a span{color:var(--fg-3)}
+.sig{margin:28px 0 0;font-size:15px;color:var(--fg-2)}
+.sig + .sig{margin-top:6px;color:var(--fg-3);font-size:14px}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px){
+  .meta{grid-template-columns:1fr 1fr}
+  .row{grid-template-columns:1fr;gap:10px}
+  .tl-legend{grid-template-columns:1fr 1fr}
+  .hooks{grid-template-columns:1fr 1fr}
+  .tracks a{grid-template-columns:44px minmax(0,1fr) 62px}
+  .tags{display:none}
+}
+@media (max-width: 720px){
+  body{font-size:16px}
+  .top{grid-template-columns:minmax(0,1fr) auto}
+  .links{display:none}
+  .pill a{padding:6px 11px;font-size:13px}
+  .hero-sub{padding-left:0}
+  .intro-grid,.faces,.t-row,.g-animal,.a-row,.duo,.g-aveio,.bonus-grid,.credits,.meta,.hooks{grid-template-columns:1fr}
+  .aveio-band .phone{flex-basis:62%}
+  .face{grid-template-columns:1fr}
+  .vinyl{width:84px}
+  .slide{flex-basis:72%}
+  .strip-ui .lbl{display:none}
+  .aveio-band{gap:10px;padding-inline:10px}
+  .aveio-band .phone{padding:4px;border-radius:22px}
+  .aveio-band .phone img{border-radius:18px}
+  .poster-wrap{position:static}
+  .sheet > div{grid-template-columns:1fr}
+  .skills li{grid-template-columns:1fr}
+}
+@media (max-width: 420px){
+  .who span{display:none}
+  .pill a{padding:6px 9px}
+  .tl-legend{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+}
+
+/* ---------- Impression / PDF : pages au format écran (1280 px de large) ---------- */
+@page{size:1280px 1810px;margin:0}
+@media print{
+  html,body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{padding-inline:56px}
+  .top{position:static}
+  .frame{-webkit-mask-image:none;mask-image:none;transform:none !important;opacity:1 !important}
+  .down,.strip-ui{display:none}
+  .rise{transform:none !important}
+  .poster-wrap{position:static}
+  .vinyl{background:radial-gradient(circle, var(--label) 0 29%, #17171a 29.6%)}
+  .vinyl::after{display:none}
+  .strip{flex-wrap:wrap;overflow:visible;margin-right:0;padding-right:0}
+  .slide{flex:0 0 calc((100% - 28px) / 3)}
+  .aveio-band .phone{transform:none !important}
+  .faces{break-before:page;padding-top:48px}
+  .track,#bonus,#credits{break-before:page}
+  .sec{padding-top:72px}
+  .track.sec,#bonus.sec,#credits.sec{padding-top:64px}
+  figure,.row,.face,.card,.hooks li,.camp li,.sheet > div,.skills li,.meta,.figs,.sell,.aveio-band,.t-row{break-inside:avoid}
+  h2,.eyebrow,.sub-h{break-after:avoid}
+  *:not(.heat),*::before,*::after{text-shadow:none !important;box-shadow:none !important;filter:none !important;animation:none !important;transition:none !important}
+}
+</style>
+
+<header class="top">
+  <div class="who"><strong>Alix Neuville</strong><span>Communication &amp; direction artistique</span></div>
+  <nav class="pill" aria-label="Sections">
+    <a href="#tracklist" data-nav="tracklist">Tracklist</a>
+    <a href="#bonus" data-nav="bonus">Bonus</a>
+    <a href="#credits" data-nav="credits">Crédits</a>
+  </nav>
+  <div class="links">
+    <a href="https://www.instagram.com/alix_nvl/" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a>
+    <a href="https://www.linkedin.com/in/alix-neuville-b885783aa" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="frame">
+      <div class="bar" aria-hidden="true"><i></i><i></i><i></i><b>+</b></div>
+      <div class="screen">
+        <h1>Je donne une image, une voix &amp; un <em>rythme</em> aux marques.</h1>
+        <div class="hero-sub">
+          <p>Communication et création à HEC Montréal.</p>
+          <p class="dim">Avant&nbsp;: Aveio, Animal’aide, Teamder.</p>
+          <p class="dim">Prochaine scène&nbsp;: HEC Mix.</p>
+        </div>
+        <a class="down" href="#intro" aria-label="Aller à l’intro">↓</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== INTRO ===================== -->
+  <section class="sec" id="intro" data-section="tracklist">
+    <div class="wrap">
+      <p class="eyebrow">Intro</p>
+      <div class="intro-grid">
+        <p class="bio">Je lance des projets et je fabrique leur image. Un compte Instagram d’achat-revente, une agence de sites web cofondée avec un ami, les supports d’une entreprise de médiation animale, des vidéos courtes pour TikTok. Chaque fois, je fais le même travail&nbsp;: comprendre ce qu’une marque veut dire, puis le rendre visible. Je suis à HEC Montréal depuis août 2026, et HEC Mix réunit ce qui me motive le plus&nbsp;: la création, la musique et les soirées qui rassemblent les gens.</p>
+        <blockquote class="pull">Avant le premier morceau, il y a l’affiche, la story et le bouche-à-oreille. <em>C’est là que je travaille.</em></blockquote>
+      </div>
+
+      <div class="faces rise">
+        <article class="face">
+          <div class="vinyl" aria-hidden="true"><span>A</span></div>
+          <div>
+            <p class="face-k">Face A · Choix 1</p>
+            <h3>Stratège <span>VP Communication</span></h3>
+            <p>Je fixe le cap&nbsp;: ce que la marque raconte, à qui, sur quels canaux et à quel rythme. Je découpe le travail en briefs clairs pour que chacun sache quoi produire et pour quand.</p>
+            <ul>
+              <li>Stratégie de lancement de Teamder, du compte Instagram au pitch</li>
+              <li>Cofondation et prospection de l’agence Aveio</li>
+              <li>Un compte de vente qui a porté plus de 15&nbsp;000&nbsp;€ de chiffre d’affaires</li>
+            </ul>
+          </div>
+        </article>
+        <article class="face b">
+          <div class="vinyl" aria-hidden="true"><span>B</span></div>
+          <div>
+            <p class="face-k">Face B · Choix 2</p>
+            <h3>Maker <span>Escouade Communication</span></h3>
+            <p>Je produis moi-même&nbsp;: logos, chartes, affiches, carrousels, vidéos courtes, sites web. Je teste vite, je compare les versions et je garde la meilleure.</p>
+            <ul>
+              <li>Plus de dix planches de recherche pour l’identité Teamder</li>
+              <li>Supports print et digitaux d’Animal’aide</li>
+              <li>Scripts et montage de formats courts</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TRACKLIST ===================== -->
+  <section class="sec" id="tracklist" data-section="tracklist">
+    <div class="wrap">
+      <p class="eyebrow">Tracklist</p>
+      <h2 class="rise">Cinq projets, <em>un même fil</em>.</h2>
+      <ol class="tracks">
+        <li><a href="#t1"><span class="no">01</span><span class="tt">Teamder<small>Une marque lancée en une semaine</small></span><span class="tags">Branding · UI · Social</span><span class="side">A + B</span></a></li>
+        <li><a href="#t2"><span class="no">02</span><span class="tt">Animal’aide<small>Une charte, du papier à l’écran</small></span><span class="tags">Print · Digital</span><span class="side">B</span></a></li>
+        <li><a href="#t3"><span class="no">03</span><span class="tt">Formats courts<small>Scripts, montage et comptes TikTok</small></span><span class="tags">Vidéo · Tendances</span><span class="side">B</span></a></li>
+        <li><a href="#t4"><span class="no">04</span><span class="tt">Deux comptes, deux voix<small>Instagram et Croix-Rouge française</small></span><span class="tags">Social media</span><span class="side">A</span></a></li>
+        <li><a href="#t5"><span class="no">05</span><span class="tt">Aveio<small>Une agence web cofondée en France</small></span><span class="tags">Web · Entrepreneuriat</span><span class="side">A</span></a></li>
+        <li><a href="#bonus"><span class="no">+</span><span class="tt">Bonus track<small>FRETTE, un concept de soirée pour HEC Mix</small></span><span class="tags">Campagne · DA</span><span class="side">A + B</span></a></li>
+      </ol>
+      <p class="legend">A = stratège (VP Communication) · B = maker (Escouade Communication)</p>
+    </div>
+  </section>
+
+  <!-- ===================== TRACK 01 · TEAMDER ===================== -->
+  <section class="sec track" id="t1" data-section="tracklist">
+    <div class="wrap">
+      <p class="eyebrow">Track 01 · Face A + B</p>
+      <h2 class="rise">Teamder, une marque <em>lancée</em> en une semaine.</h2>
+      <dl class="meta">
+        <div><dt>Contexte</dt><dd>Compétition «&nbsp;Santé et bien-être&nbsp;» à HEC Montréal, septembre 2026. Équipe de quatre.</dd></div>
+        <div><dt>Mon rôle</dt><dd>Direction artistique, identité de marque, contenus Instagram, prototype de l’app.</dd></div>
+        <div><dt>Livrables</dt><dd>Logo et fiche de marque, 6 écrans d’app, 3 carrousels Instagram, app installable sur iPhone.</dd></div>
+      </dl>
+
+      <div class="gallery">
+        <div class="strip" id="strip" tabindex="0" role="region" aria-label="Slides des carrousels Instagram Teamder, à faire défiler horizontalement">
+          <figure class="slide"><img src="assets/teamder-s1.jpg" alt="Slide de couverture : « Le sport commence par un match. » avec l’app ouverte sur un iPhone" draggable="false"></figure>
+          <figure class="slide"><img src="assets/teamder-s2.jpg" alt="Slide « On voulait juste jouer le mardi soir. »" draggable="false"></figure>
+          <figure class="slide"><img src="assets/teamder-s3.jpg" alt="Slide « Trouver du monde, c’est facile. Qu’ils viennent, moins. » avec l’écran Tes games" draggable="false"></figure>
+          <figure class="slide"><img src="assets/teamder-s4.jpg" alt="Slide « Il manque un joueur ? Trois minutes. » avec l’alerte rouge de l’app" draggable="false"></figure>
+          <figure class="slide"><img src="assets/teamder-s5.jpg" alt="Slide « Ici, tout le monde se présente. » avec l’écran Présence validée" draggable="false"></figure>
+          <figure class="slide"><img src="assets/teamder-s6.jpg" alt="Slide « Une game, du début à la fin. »" draggable="false"></figure>
+        </div>
+        <div class="strip-ui">
+          <span class="lbl">6 slides sur 14 · glisse pour défiler</span>
+          <div class="progress" aria-hidden="true"><i></i></div>
+          <button type="button" class="sbtn" data-dir="-1" aria-label="Slide précédente">←</button>
+          <button type="button" class="sbtn" data-dir="1" aria-label="Slide suivante">→</button>
+        </div>
+
+        <div class="t-row rise">
+          <figure class="tile t-fiche"><img src="assets/teamder-fiche-wide.jpg" alt="Fiche de marque Teamder : le logo T sur trois fonds et le lettrage coupé crème et bleu" loading="lazy"><figcaption>Fiche de marque&nbsp;: une page pour que toute l’équipe produise juste</figcaption></figure>
+          <a class="ig-card" href="https://www.instagram.com/teamder.app/" target="_blank" rel="noopener">
+            <span class="k">Instagram · en ligne</span>
+            <span class="handle">@teamder.app</span>
+            <span class="desc">Le compte de lancement&nbsp;: identité, carrousels et posts épinglés.</span>
+            <span class="go">Voir le compte <span aria-hidden="true">↗</span></span>
+          </a>
+        </div>
+      </div>
+
+      <div class="story">
+        <div class="row"><h3 class="lab">Le défi</h3><div class="txt">
+          <p>Une semaine pour transformer une idée en marque crédible&nbsp;: une app pour trouver des partenaires de sport à Montréal, à montrer en direct au jury. Il fallait aussi éviter de ressembler à une application de rencontre de plus.</p>
+        </div></div>
+        <div class="row"><h3 class="lab">La stratégie</h3><div class="txt">
+          <p>Positionner Teamder sur l’activité plutôt que sur les personnes&nbsp;: on swipe des matchs, pas des profils. La promesse tient en une phrase, <strong>«&nbsp;Le sport commence par un match.&nbsp;»</strong></p>
+          <p>Pour ancrer la marque à Montréal, j’ai choisi le parler québécois («&nbsp;J’embarque&nbsp;», «&nbsp;Y manque un joueur&nbsp;», «&nbsp;À soir&nbsp;») et les codes visuels du hockey.</p>
+        </div></div>
+        <div class="row"><h3 class="lab">Les actions créatives</h3><div class="txt">
+          <ul>
+            <li>Plus de dix planches de recherche et des dizaines de variantes de logo, de quatre pistes de départ à une direction finale validée par l’équipe.</li>
+            <li>Une fiche de marque d’une page (logo, couleurs, typographies, règles d’usage) pour que chacun produise des visuels cohérents en autonomie.</li>
+            <li>Un compte Instagram préparé avant le premier post&nbsp;: nom, bio, et trois carrousels qui racontent le problème, la solution et le mode d’emploi.</li>
+            <li>Un prototype d’app installable sur iPhone, pensé pour la démo en direct pendant le pitch.</li>
+          </ul>
+        </div></div>
+        <div class="row"><h3 class="lab">Résultats &amp; compétences</h3><div class="txt">
+          <div class="figs">
+            <div class="fig"><b>5 jours</b><span>de la première planche au kit complet</span></div>
+            <div class="fig"><b>14</b><span>slides Instagram en 3 carrousels</span></div>
+            <div class="fig"><b>6</b><span>écrans d’app prêts pour la démo</span></div>
+          </div>
+          <p>Une identité complète et un kit que toute l’équipe pouvait utiliser seule, livrés avant le pitch du 26 septembre. Le compte <strong>@teamder.app</strong> est en ligne.</p>
+          <ul class="chips"><li>Direction artistique</li><li>Identité de marque</li><li>UI mobile</li><li>Stratégie de lancement</li><li>Délais courts</li></ul>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TRACK 02 · ANIMAL'AIDE ===================== -->
+  <section class="sec track" id="t2" data-section="tracklist">
+    <div class="wrap">
+      <p class="eyebrow">Track 02 · Face B</p>
+      <h2 class="rise">Animal’aide, une charte du <em>papier</em> à l’écran.</h2>
+      <dl class="meta">
+        <div><dt>Contexte</dt><dd>Animal’aide, entreprise de médiation par l’animal (chien et cheval), en France.</dd></div>
+        <div><dt>Mon rôle</dt><dd>Création graphique print et digitale, dans le respect de la charte existante.</dd></div>
+        <div><dt>Livrables</dt><dd>Carte de visite, visuel de présentation, bannière réseaux, signature mail, déclinaison sur le site web.</dd></div>
+      </dl>
+
+      <div class="gallery g-animal rise">
+        <figure class="tile a-wide"><img src="assets/animalaide-carte.jpg" alt="Carte de visite de Candice Neuville, intervenante en médiation animale, avec le logo Animal’aide" loading="lazy"><figcaption>Carte de visite</figcaption></figure>
+        <figure class="tile a-wide"><img src="assets/animalaide-visuel.jpg" alt="Visuel de présentation : le logo Animal’aide et la mention « Séances avec le chien et/ou le cheval adaptés à vos besoins »" loading="lazy"><figcaption>Visuel de présentation</figcaption></figure>
+        <div class="a-row">
+          <figure class="tile a-banner"><img src="assets/animalaide-banniere.png" alt="Bannière réseaux Animal’aide : le nom en vert, deux boutons orange, un cheval et un chien dessinés en filigrane" loading="lazy"><figcaption>Bannière réseaux sociaux</figcaption></figure>
+          <figure class="tile a-sign"><img src="assets/animalaide-signature.png" alt="Signature mail Animal’aide avec le logo, le nom et les coordonnées" loading="lazy"><figcaption>Signature mail</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="story">
+        <div class="row"><h3 class="lab">Le défi</h3><div class="txt">
+          <p>Animal’aide avait un logo fort, dessiné à la main, en orange et vert. Il fallait le faire vivre partout où l’entreprise rencontre ses clients&nbsp;: en main propre, dans les courriels, sur les réseaux et sur le site.</p>
+        </div></div>
+        <div class="row"><h3 class="lab">La stratégie</h3><div class="txt">
+          <p>Garder le logo intact et fixer quelques règles simples&nbsp;: le vert pour le nom, l’orange pour l’action (bandeaux, boutons, pictos), un fond clair texturé et des animaux dessinés au trait en filigrane. La même grammaire visuelle tient de la carte de visite (85&nbsp;×&nbsp;55&nbsp;mm) à la bannière Facebook.</p>
+        </div></div>
+        <div class="row"><h3 class="lab">Les actions créatives</h3><div class="txt">
+          <ul>
+            <li>Carte de visite et visuel de présentation&nbsp;: le logo en héros, les coordonnées alignées derrière des pictos orange.</li>
+            <li>Bannière réseaux et signature mail&nbsp;: le nom en grand, les services en boutons orange, cheval et chien en filigrane.</li>
+            <li>Déclinaison de la direction artistique sur le site web et les supports physiques.</li>
+          </ul>
+        </div></div>
+        <div class="row"><h3 class="lab">Résultats &amp; compétences</h3><div class="txt">
+          <p>Une marque qu’on reconnaît au premier coup d’œil, sur papier comme sur écran.</p>
+          <p>Pour HEC Mix, c’est le même exercice&nbsp;: une identité qu’on décline sur chaque support sans la perdre, du flyer à la story.</p>
+          <ul class="chips"><li>Respect de charte</li><li>Mise en page print</li><li>Hiérarchie de l’information</li><li>Déclinaison multi-supports</li></ul>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TRACK 03 · FORMATS COURTS ===================== -->
+  <section class="sec track" id="t3" data-section="tracklist">
+    <div class="wrap">
+      <p class="eyebrow">Track 03 · Face B</p>
+      <h2 class="rise">Formats courts, tout se joue en <em>trois secondes</em>.</h2>
+      <dl class="meta">
+        <div><dt>Contexte</dt><dd>La vidéo d’une entreprise, et plusieurs comptes TikTok gérés en parallèle.</dd></div>
+        <div><dt>Mon rôle</dt><dd>Stratégie vidéo, écriture de scripts, veille des tendances, montage.</dd></div>
+        <div><dt>Livrables</dt><dd>Scripts, TikTok, Reels et Shorts, rythme de publication.</dd></div>
+      </dl>
+
+      <div class="gallery rise">
+        <figure class="timeline" aria-label="Structure type d’un format court de 30 secondes, présentée comme une timeline de montage">
+          <div class="tl-head"><b>Structure type d’un format court</b><span>00:00 → 00:30</span></div>
+          <div class="tl-body">
+            <div class="names" aria-hidden="true"><span></span><span>Image</span><span>Texte</span><span>Son</span></div>
+            <div class="lanes" aria-hidden="true">
+              <div class="ruler"><span style="--t:0">0 s</span><span style="--t:3">3 s</span><span style="--t:10">10 s</span><span style="--t:25">25 s</span><span style="--t:30">30 s</span></div>
+              <div class="lane">
+                <span class="clip hook" style="--s:0;--e:3">Accroche</span>
+                <span class="clip" style="--s:3;--e:10">Tension</span>
+                <span class="clip c3" style="--s:10;--e:25">Preuve</span>
+                <span class="clip" style="--s:25;--e:30">Action</span>
+              </div>
+              <div class="lane">
+                <span class="sub" style="--s:0;--e:3"></span><span class="sub" style="--s:3;--e:6.5"></span><span class="sub" style="--s:6.5;--e:10"></span><span class="sub" style="--s:10;--e:14"></span><span class="sub" style="--s:14;--e:18"></span><span class="sub" style="--s:18;--e:22"></span><span class="sub" style="--s:22;--e:25"></span><span class="sub" style="--s:25;--e:30"></span>
+              </div>
+              <div class="lane">
+                <span class="wave soft" style="--s:0;--e:10"></span>
+                <span class="wave" style="--s:10;--e:30"></span>
+              </div>
+              <span class="playhead"></span>
+            </div>
+          </div>
+          <ol class="tl-legend">
+            <li><b>0–3 s · Accroche</b>Une image ou une phrase qui arrête le défilement.</li>
+            <li><b>3–10 s · Tension</b>Le problème ou la promesse, posé vite.</li>
+            <li><b>10–25 s · Preuve</b>Démonstration, avant/après, coulisses. Le son monte.</li>
+            <li><b>25–30 s · Action</b>Une seule consigne&nbsp;: s’abonner, réserver, commenter.</li>
+          </ol>
+          <p class="tl-note">Exemples vidéo disponibles sur demande.</p>
+        </figure>
+      </div>
+
+      <div class="story">
+        <div class="row"><h3 class="lab">Le défi</h3><div class="txt">
+          <p>Sur TikTok et Reels, on décide en moins de deux secondes si on regarde ou si on passe. L’entreprise voulait des vidéos qui retiennent l’attention et qui servent ses objectifs.</p>
+        </div></div>
+        <div class="row"><h3 class="lab">La stratégie</h3><div class="txt">
+          <p>Partir des tendances (sons, formats, montages) et les adapter à la marque au lieu de les copier. Chaque vidéo a un seul objectif, faire connaître, convaincre ou faire agir, et un script court qui le sert.</p>
+        </div></div>
+        <div class="row"><h3 class="lab">Les actions créatives</h3><div class="txt">
+          <ul>
+            <li>Écriture de scripts de 15 à 45 secondes, en travaillant l’accroche en premier.</li>
+            <li>Veille régulière des tendances et choix des sons.</li>
+            <li>Montage rythmé&nbsp;: coupes sur le temps, sous-titres lisibles sans le son, plan d’ouverture fort.</li>
+            <li>Gestion de plusieurs comptes TikTok&nbsp;: calendrier de publication, lecture des statistiques, ajustement des formats qui marchent.</li>
+          </ul>
+        </div></div>
+        <div class="row"><h3 class="lab">Résultats &amp; compétences</h3><div class="txt">
+          <p>Une méthode reproductible pour produire vite des vidéos qui tiennent l’attention. Pour HEC Mix, elle s’applique directement aux teasers de line-up, aux extraits de sets et aux aftermovies.</p>
+          <ul class="chips"><li>Écriture de scripts</li><li>Montage</li><li>Veille de tendances</li><li>TikTok &amp; Reels</li><li>Lecture des statistiques</li></ul>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TRACK 04 · SOCIAL ===================== -->
+  <section class="sec track" id="t4" data-section="tracklist">
+    <div class="wrap">
+      <p class="eyebrow">Track 04 · Face A</p>
+      <h2 class="rise">Deux comptes, <em>deux voix</em>.</h2>
+      <dl class="meta">
+        <div><dt>Contexte</dt><dd>Mon activité d’achat-revente sur Instagram, et des contenus pour la Croix-Rouge française.</dd></div>
+        <div><dt>Mon rôle</dt><dd>Gestion de compte, création visuelle, rédaction, animation de communauté.</dd></div>
+        <div><dt>Livrables</dt><dd>Visuels originaux, feed, légendes, contenus de sensibilisation.</dd></div>
+      </dl>
+
+      <div class="gallery duo rise">
+        <article class="card">
+          <p class="k">Achat-revente · Instagram</p>
+          <p class="big">15&nbsp;000&nbsp;€<sup>+</sup></p>
+          <p class="cap">de chiffre d’affaires pour l’activité d’achat-revente, avec un compte Instagram géré de A à Z.</p>
+        </article>
+        <article class="card">
+          <p class="k">Croix-Rouge française</p>
+          <p class="big serif">Créer dans un cadre strict.</p>
+          <ul>
+            <li>Une charte institutionnelle respectée à la lettre</li>
+            <li>Un ton engagé et sobre</li>
+            <li>Des visuels au service d’une cause</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="story">
+        <div class="row"><h3 class="lab">Le défi</h3><div class="txt">
+          <p>Parler à deux publics que tout oppose. D’un côté, vendre vite avec un compte personnel. De l’autre, porter la parole d’une institution humanitaire sans jamais sortir de sa charte.</p>
+        </div></div>
+        <div class="row"><h3 class="lab">La stratégie</h3><div class="txt">
+          <p><strong>Achat-revente.</strong> Traiter le compte comme une boutique&nbsp;: des visuels soignés, un feed cohérent, des légendes qui donnent envie d’écrire en privé.</p>
+          <p><strong>Croix-Rouge française.</strong> Mettre la créativité au service du message, dans le cadre de la charte institutionnelle.</p>
+        </div></div>
+        <div class="row"><h3 class="lab">Les actions créatives</h3><div class="txt">
+          <ul>
+            <li>Création de visuels originaux et alimentation régulière du feed.</li>
+            <li>Travail de l’acquisition et de l’engagement&nbsp;: légendes, réponses aux messages, relances.</li>
+            <li>Pour la Croix-Rouge française, création de contenus visuels et de messages engagés qui respectent l’identité de l’institution.</li>
+          </ul>
+        </div></div>
+        <div class="row"><h3 class="lab">Résultats &amp; compétences</h3><div class="txt">
+          <p>Deux registres maîtrisés&nbsp;: le ton direct qui fait vendre, et le ton institutionnel qui inspire confiance. Une soirée HEC Mix a besoin des deux, l’envie d’y aller et la confiance dans l’organisation.</p>
+          <ul class="chips"><li>Gestion de communauté</li><li>Ton de marque</li><li>Création sous charte</li><li>Acquisition</li><li>Engagement</li></ul>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TRACK 05 · AVEIO ===================== -->
+  <section class="sec track" id="t5" data-section="tracklist">
+    <div class="wrap">
+      <p class="eyebrow">Track 05 · Face A</p>
+      <h2 class="rise">Aveio, des sites qui <em>travaillent</em>.</h2>
+      <dl class="meta">
+        <div><dt>Contexte</dt><dd>Agence de création de sites web cofondée avec un ami, dans ma ville natale en France.</dd></div>
+        <div><dt>Mon rôle</dt><dd>Cofondation, offre, design et production des sites, prospection.</dd></div>
+        <div><dt>Livrables</dt><dd>Gabarit maître, sites démo personnalisés, sites pour des projets personnels et familiaux.</dd></div>
+      </dl>
+
+      <div class="gallery">
+        <div class="g-aveio">
+        <div>
+        <div class="aveio-band" id="aveio-band">
+          <figure class="phone"><img src="assets/aveio-cochard.jpg" alt="Site démo d’Électricité Cochard sur mobile : titre, bouton Demander un devis gratuit et barre Appeler / Devis gratuit" loading="lazy"></figure>
+        </div>
+        <p class="cap-line">Un des sites démo personnalisés, vu sur mobile</p>
+        </div>
+        <div>
+        <h3 class="sub-h" style="margin-top:0">Ce que le site fait pour vendre</h3>
+        <ul class="sell">
+          <li><b>Le métier et la ville</b>dans le titre, pour être trouvé et compris tout de suite.</li>
+          <li><b>«&nbsp;Devis gratuit&nbsp;»</b>en bouton principal, toujours à portée de pouce.</li>
+          <li><b>Appeler en un geste</b>grâce à la barre fixée en bas de l’écran.</li>
+          <li><b>Des preuves de sérieux</b>ancienneté, certifications, avis.</li>
+        </ul>
+        </div>
+        </div>
+      </div>
+
+      <div class="story">
+        <div class="row"><h3 class="lab">Le défi</h3><div class="txt">
+          <p>Beaucoup d’artisans n’ont pas de site, ou un site qui ne leur apporte aucun client. Ils n’ont pas le temps de s’en occuper, et un devis abstrait ne les convainc pas.</p>
+        </div></div>
+        <div class="row"><h3 class="lab">La stratégie</h3><div class="txt">
+          <p>Inverser la vente&nbsp;: on montre à l’artisan son futur site, déjà construit, avec son nom, ses services et sa ville. La décision devient concrète avant même le premier rendez-vous.</p>
+        </div></div>
+        <div class="row"><h3 class="lab">Les actions créatives</h3><div class="txt">
+          <ul>
+            <li>Un gabarit maître pensé pour convertir, décliné ensuite pour chaque métier.</li>
+            <li>Un site démo personnalisé par prospect, mis en ligne sur GitHub Pages.</li>
+            <li>Une prospection à deux&nbsp;: je conçois les sites, mon associé démarche les entreprises.</li>
+            <li>Plusieurs autres sites pour des projets personnels et des besoins familiaux.</li>
+          </ul>
+        </div></div>
+        <div class="row"><h3 class="lab">Résultats &amp; compétences</h3><div class="txt">
+          <div class="figs">
+            <div class="fig"><b>12</b><span>sites démo en ligne lors de la première vague</span></div>
+            <div class="fig"><b>10</b><span>autres en préparation pour la deuxième</span></div>
+          </div>
+          <p>Une offre claire et une méthode qui permet de présenter un site personnalisé en très peu de temps. C’est le réflexe que j’apporterais à HEC Mix&nbsp;: montrer au lieu d’expliquer, et livrer vite.</p>
+          <ul class="chips"><li>Web design</li><li>UX orientée conversion</li><li>Entrepreneuriat</li><li>Prospection</li><li>Gestion de projet</li></ul>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BONUS · FRETTE ===================== -->
+  <section class="sec" id="bonus" data-section="bonus">
+    <div class="wrap">
+      <p class="eyebrow">Bonus track · Concept pour HEC Mix</p>
+      <h2 class="rise">FRETTE, la soirée de la <em>session d’hiver</em>.</h2>
+      <p class="bonus-intro">En janvier, Montréal gèle. FRETTE en fait son argument&nbsp;: pendant une nuit, la soirée HEC Mix devient l’endroit le plus chaud de la ville.</p>
+
+      <div class="bonus-grid">
+        <figure class="poster-wrap">
+          <div class="poster" role="img" aria-label="Maquette d’affiche FRETTE : taches de chaleur orange et magenta sur fond bleu nuit, façon caméra thermique, titre FRETTE, moins 22 degrés dehors, 128 BPM dedans">
+            <div class="heat a"></div><div class="heat b"></div><div class="heat c"></div>
+            <div class="p-top"><span>HEC Mix présente</span><span>Vol. 01</span></div>
+            <p class="p-title">FRETTE</p>
+            <p class="p-tag">La soirée de la session d’hiver</p>
+            <div class="hud" aria-hidden="true">
+              <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+              <span class="cross">+</span><span class="read">36,6&nbsp;°C</span>
+              <div class="scale"><span>+37°</span><span>−22°</span></div>
+            </div>
+            <div class="p-bottom">
+              <div><b>−22&nbsp;°C</b><span>dehors</span></div>
+              <div><b>128&nbsp;BPM</b><span>dedans</span></div>
+            </div>
+            <div class="p-foot"><span>Janvier 2027 · Montréal</span><span>Lieu dévoilé à J-7</span></div>
+          </div>
+          <figcaption>Maquette d’affiche réalisée pour cette candidature</figcaption>
+        </figure>
+
+        <div>
+          <dl class="sheet">
+            <div><dt>Le nom</dt><dd><strong>FRETTE</strong>«&nbsp;Très froid&nbsp;», en québécois. Un mot d’ici, court, facile à crier et à reprendre en hashtag&nbsp;: #FretteHECMix.</dd></div>
+            <div><dt>Le moment</dt><dd><strong>La rentrée d’hiver, janvier 2027</strong>Un jeudi de la première semaine de cours, quand tout le monde revient et cherche une première sortie.</dd></div>
+            <div><dt>La promesse</dt><dd><strong>«&nbsp;Dehors −22&nbsp;°C. Dedans 128&nbsp;BPM.&nbsp;»</strong>Le froid devient le meilleur argument pour sortir.</dd></div>
+            <div><dt>Direction artistique</dt><dd><strong>L’imagerie thermique</strong>La ville en bleu glacé, la foule en taches de chaleur, du magenta au jaune. Une typographie condensée et haute, comme la colonne d’un thermomètre. Les DJs présentés en portraits thermiques.</dd></div>
+            <div><dt>Sur place</dt><dd><strong>Une expérience qui prolonge l’affiche</strong>Un vestiaire baptisé «&nbsp;zone de dégel&nbsp;» et un photocall façon caméra thermique, pensé pour les stories.</dd></div>
+          </dl>
+
+          <h3 class="sub-h">La campagne, sur trois semaines</h3>
+          <ol class="camp">
+            <li style="--h:var(--h1)"><span class="j">J-21</span><span><strong>Teaser.</strong> Une story météo «&nbsp;−22&nbsp;°C&nbsp;», sans logo, avec seulement la date.</span></li>
+            <li style="--h:var(--h2)"><span class="j">J-14</span><span><strong>Line-up.</strong> Un DJ dévoilé par jour, en portrait thermique.</span></li>
+            <li style="--h:var(--h3)"><span class="j">J-10</span><span><strong>Prévente.</strong> Billets à prix réduit pendant 48&nbsp;h seulement.</span></li>
+            <li style="--h:var(--h4)"><span class="j">J-7</span><span><strong>Le lieu.</strong> Dévoilé sur une carte de Montréal qui «&nbsp;se réchauffe&nbsp;» en story.</span></li>
+            <li style="--h:var(--h5)"><span class="j">J-3</span><span><strong>Concours.</strong> «&nbsp;Tague ton ami le plus frileux&nbsp;», deux places à gagner.</span></li>
+            <li style="--h:var(--h6)"><span class="j">J-1</span><span><strong>Le thermomètre.</strong> Sondage en story et derniers billets.</span></li>
+            <li style="--h:var(--h7)"><span class="j">Jour J</span><span><strong>En direct.</strong> Stories depuis la piste, les DJs identifiés à chaque passage.</span></li>
+            <li style="--h:var(--h8)"><span class="j">J+2</span><span><strong>Aftermovie.</strong> 30 secondes de soirée et une galerie photo pour faire vivre la suivante.</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <h3 class="sub-h">Les accroches</h3>
+      <ul class="hooks rise">
+        <li><q>Dehors −22&nbsp;°C. Dedans 128&nbsp;BPM.</q><span>Affiche et teaser</span></li>
+        <li><q>Le line-up tombe quand le thermomètre passe sous −20.</q><span>Story, J-21</span></li>
+        <li><q>Ton manteau va au vestiaire. Toi, sur la piste.</q><span>Post billetterie</span></li>
+        <li><q>Tague ton ami le plus frileux.</q><span>Concours, J-3</span></li>
+        <li><q>Réchauffement local garanti.</q><span>Story, J-1</span></li>
+        <li><q>Laisse ta tuque à l’entrée.</q><span>Story, jour J</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== CRÉDITS ===================== -->
+  <section class="sec" id="credits" data-section="credits">
+    <div class="wrap">
+      <p class="eyebrow">Crédits</p>
+      <h2 class="rise">Compétences <em>&amp;</em> outils.</h2>
+      <div class="credits">
+        <div>
+          <h3>Compétences</h3>
+          <ul class="skills">
+            <li><b>Branding</b><span>Logos, chartes, fiches de marque, déclinaisons print et digitales</span></li>
+            <li><b>Web design</b><span>Sites vitrines, maquettes, parcours pensés pour convertir</span></li>
+            <li><b>Montage vidéo</b><span>Scripts, formats courts, sous-titres, rythme</span></li>
+            <li><b>Stratégie social media</b><span>Calendrier éditorial, ton de marque, communauté, statistiques</span></li>
+            <li><b>Communication événementielle</b><span>Affiches, campagnes de lancement, billetterie, contenus en direct</span></li>
+            <li><b>Leadership</b><span>Briefs, coordination d’équipe, délais courts</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Outils</h3>
+          <dl class="tools">
+            <div><dt>Design</dt><dd><span>Figma</span><span>Canva</span><span>Photoshop</span><span>Lightroom</span></dd></div>
+            <div><dt>Vidéo</dt><dd><span>CapCut</span></dd></div>
+            <div><dt>Web</dt><dd><span>HTML / CSS</span><span>WordPress</span><span>GitHub Pages</span></dd></div>
+            <div><dt>Réseaux</dt><dd><span>Instagram</span><span>TikTok</span></dd></div>
+            <div><dt>IA</dt><dd><span>Claude</span><span>Prototypage assisté par IA</span></dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="end">
+  <div class="wrap">
+    <p class="thanks">Merci d’avoir écouté <em>jusqu’au bout</em>.</p>
+    <p class="contact">
+      <a href="https://www.instagram.com/alix_nvl/" target="_blank" rel="noopener">Instagram <span>@alix_nvl</span> ↗</a>
+      <a href="https://www.linkedin.com/in/alix-neuville-b885783aa" target="_blank" rel="noopener">LinkedIn <span>Alix Neuville</span> ↗</a>
+    </p>
+    <p class="sig">Alix Neuville · HEC Montréal, automne 2026</p>
+    <p class="sig">Choix 1&nbsp;: VP Communication · Choix 2&nbsp;: Escouade Communication · CV joint au dossier</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Navigation : surligne la section en cours */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.pill a'));
+  if ('IntersectionObserver' in window && links.length) {
+    var navIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var key = e.target.getAttribute('data-section');
+        links.forEach(function (a) { a.classList.toggle('on', a.getAttribute('data-nav') === key); });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    document.querySelectorAll('[data-section]').forEach(function (s) { navIO.observe(s); });
+  }
+
+  /* Entrées en mouvement : seulement pour ce qui est encore sous l'écran */
+  if (!reduce && 'IntersectionObserver' in window) {
+    var riseIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.remove('pre'); riseIO.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.rise').forEach(function (el) {
+      if (el.getBoundingClientRect().top > window.innerHeight) { el.classList.add('pre'); riseIO.observe(el); }
+    });
+  }
+
+  /* Carrousel Teamder : boutons, glisser à la souris, barre de progression */
+  var strip = document.getElementById('strip');
+  if (strip) {
+    var bar = document.querySelector('.progress i');
+    var step = function () {
+      var s = strip.querySelector('.slide');
+      return s ? s.getBoundingClientRect().width + 14 : 300;
+    };
+    var paint = function () {
+      if (!bar) return;
+      var sw = strip.scrollWidth, cw = strip.clientWidth;
+      bar.style.setProperty('--w', Math.min(100, cw / sw * 100) + '%');
+      bar.style.setProperty('--x', (strip.scrollLeft / sw * 100) + '%');
+    };
+    document.querySelectorAll('.sbtn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        strip.scrollBy({ left: Number(b.getAttribute('data-dir')) * step(), behavior: reduce ? 'auto' : 'smooth' });
+      });
+    });
+    var down = false, startX = 0, startL = 0;
+    strip.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      down = true; startX = e.clientX; startL = strip.scrollLeft; strip.classList.add('drag');
+    });
+    window.addEventListener('pointermove', function (e) {
+      if (!down) return;
+      strip.scrollLeft = startL - (e.clientX - startX);
+    });
+    window.addEventListener('pointerup', function () {
+      if (!down) return;
+      down = false; strip.classList.remove('drag');
+    });
+    strip.addEventListener('scroll', paint, { passive: true });
+    window.addEventListener('resize', paint);
+    paint();
+  }
+
+  /* Défilement : la fenêtre du hero bascule, les téléphones Aveio flottent */
+  if (!reduce) {
+    var frame = document.querySelector('.frame');
+    var band = document.getElementById('aveio-band');
+    var phones = band ? Array.prototype.slice.call(band.querySelectorAll('.phone')) : [];
+    var speeds = [26, -18, 34];
+    var ticking = false;
+    var update = function () {
+      ticking = false;
+      if (frame) {
+        var k = Math.min(1, window.scrollY / 700);
+        frame.style.transform = 'perspective(1400px) rotateX(' + (k * 9).toFixed(2) + 'deg) scale(' + (1 - k * 0.05).toFixed(3) + ')';
+      }
+      if (band) {
+        var r = band.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < window.innerHeight) {
+          var c = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;
+          phones.forEach(function (p, i) { p.style.setProperty('--py', (c * speeds[i]).toFixed(1) + 'px'); });
+        }
+      }
+    };
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+  }
+})();
+</script>
+
+</html>
